@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nespresso Concierge</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/caps/ristretto.png">
+<link rel="stylesheet" href="styles.css?v=8">
+</head>
+<body>
+  <!-- ## Testata: logo, navigazione e assistente -->
+  <header class="top">
+    <a class="brand" href="#panoramica" aria-label="Nespresso Concierge, panoramica">
+      <img src="assets/logo-wordmark.svg" alt="Nespresso" width="150" height="27">
+      <span>Concierge</span>
+    </a>
+    <nav aria-label="Sezioni">
+      <a href="#panoramica">Panoramica</a>
+      <a href="#macchine">Le mie macchine</a>
+      <a href="#consumi">Consumi</a>
+      <a href="#ordini">Ordini</a>
+      <a href="#sospeso">Caffè sospeso</a>
+      <a href="#eventi">Eventi</a>
+    </nav>
+    <button class="btn-assist" id="open-chat" type="button"><span class="only-wide">Chiedi all'assistente</span><span class="only-phone">Assistente</span></button>
+  </header>
+
+  <!-- ## Contenuto: ogni pagina viene disegnata qui da app.js -->
+  <main id="view" tabindex="-1"></main>
+
+  <footer class="foot">
+    <p>Prototipo concept per la sprint week MEIM. Cliente, consumi ed eventi sono dati dimostrativi; catalogo e prezzi vengono da nespresso.com/pro/it/it (novembre 2026). Nessun ordine viene inviato davvero.</p>
+  </footer>
+
+  <!-- ## Barra demo: serve durante la presentazione per far passare il tempo -->
+  <div class="demobar" role="group" aria-label="Comandi della demo">
+    <span id="demo-today"></span>
+    <button id="demo-next" type="button"><span class="only-wide">Avanza di un giorno</span><span class="only-phone">+1 giorno</span></button>
+    <button id="demo-week" type="button"><span class="only-wide">Avanza di una settimana</span><span class="only-phone">+1 settimana</span></button>
+    <button id="demo-reset" type="button">Ricomincia</button>
+  </div>
+
+  <!-- ## Assistente: pannello laterale -->
+  <aside class="chat" id="chat" aria-label="Assistente" hidden>
+    <div class="chat-head">
+      <h2>Assistente</h2>
+      <button id="close-chat" type="button" aria-label="Chiudi assistente">Chiudi</button>
+    </div>
+    <div class="chat-log" id="chat-log" aria-live="polite"></div>
+    <div class="chat-suggest" id="chat-suggest"></div>
+    <form class="chat-form" id="chat-form">
+      <label class="sr" for="chat-input">Scrivi una domanda</label>
+      <input id="chat-input" autocomplete="off" placeholder="Es. sabato ho 120 ospiti">
+      <button type="submit">Invia</button>
+    </form>
+  </aside>
+
+  <!-- ## Chatbot dei caffe': pulsante sempre visibile e pannello -->
+  <button class="cof-open" id="cof-open" type="button"><img src="assets/caps/ristretto.png" alt=""><span class="cof-label">Scopri i caffè</span></button>
+  <aside class="chat" id="cof" aria-label="Il sommelier del caffè" hidden>
+    <div class="chat-head">
+      <h2>Il sommelier del caffè</h2>
+      <button id="cof-close" type="button" aria-label="Chiudi il sommelier del caffè">Chiudi</button>
+    </div>
+    <div class="chat-log" id="cof-log" aria-live="polite"></div>
+    <div class="chat-suggest" id="cof-suggest"></div>
+    <form class="chat-form" id="cof-form">
+      <label class="sr" for="cof-input">Chiedi di un caffè</label>
+      <input id="cof-input" autocomplete="off" placeholder="Es. differenza tra Forte e Leggero">
+      <button type="submit">Invia</button>
+    </form>
+  </aside>
+
+  <dialog id="reg"></dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+
+  <script src="data.js?v=8"></script>
+  <script src="app.js?v=8"></script>
+</body>
+</html>
