@@ -1,5 +1,5 @@
 // ## Catalogo reale
-// Nomi, prezzi a capsula, intensita e immagini letti da nespresso.com/pro/it/it il 5/11/2026.
+// Nomi, prezzi a cialda, intensita e immagini letti da nespresso.com/pro/it/it il 5/11/2026.
 const CATALOG = {
  "capsules": [
   {

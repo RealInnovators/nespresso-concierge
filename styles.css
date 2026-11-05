@@ -33,7 +33,7 @@ main { min-height: calc(100dvh - 190px); }
 .btn-assist { background: none; border: 1px solid var(--gold-on-black); color: var(--white); border-radius: 99px; padding: 7px 18px; white-space: nowrap; flex: none; }
 .btn-assist:hover { background: var(--gold); border-color: var(--gold); }
 
-/* ## Hero: la frase dell'AI e la capsula gigante */
+/* ## Hero: la frase dell'AI e la cialda gigante */
 .hero { background: var(--black); color: var(--white); position: relative; overflow: hidden; padding: clamp(40px, 7vw, 92px) var(--gut) clamp(44px, 6vw, 80px); min-height: 440px; }
 .hero-inner { position: relative; z-index: 1; max-width: 700px; }
 .hero .who { color: #bdbdbd; font-weight: 300; margin-bottom: 26px; }
@@ -315,7 +315,7 @@ tr.sum td { font-weight: 500; border-bottom: 0; font-size: 19px; }
   /* Tocchi piu' comodi */
   .link { display: inline-block; padding: 6px 0; }
   input[type=range] { height: 32px; }
-  /* Pulsante caffe': solo capsula, per non coprire il contenuto */
+  /* Pulsante caffe': solo cialda, per non coprire il contenuto */
   .cof-open { right: 14px; bottom: 62px; padding: 5px; }
   .cof-open img { width: 42px; height: 42px; }
   .cof-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }

@@ -281,8 +281,8 @@ function drawRunway(a, animate) {
   const note = a.orderBy ? `<p class="rw-note">Ordina entro ${fDay(a.orderBy)}, consegna ${fDay(a.arrival)}</p>` : '';
   box.innerHTML = note + rows.map(r => {
     const c = CAP[r.cap], dl = r.daysLeft ?? AXIS_DAYS + 1, over = dl > AXIS_DAYS;
-    return `<div class="rw-row rw-hit" data-tip="${esc(c.name)}: ${int(state.stock[r.cap])} capsule in magazzino, ${int(r.avg)} al giorno. ${r.by ? 'Ordine singolo necessario entro ' + fDay(r.by) + '.' : 'Nessun ordine necessario.'}">
-      <div class="rw-cof"><img src="${c.img}" alt=""><div><b>${esc(c.name)}</b><small>${int(state.stock[r.cap])} capsule, ${int(r.avg)} al giorno</small></div></div>
+    return `<div class="rw-row rw-hit" data-tip="${esc(c.name)}: ${int(state.stock[r.cap])} cialde in magazzino, ${int(r.avg)} al giorno. ${r.by ? 'Ordine singolo necessario entro ' + fDay(r.by) + '.' : 'Nessun ordine necessario.'}">
+      <div class="rw-cof"><img src="${c.img}" alt=""><div><b>${esc(c.name)}</b><small>${int(state.stock[r.cap])} cialde, ${int(r.avg)} al giorno</small></div></div>
       <div class="rw-track"><div class="rw-bar ${over ? 'over' : ''}" data-w="${x(dl) * 100}" style="background:${c.color};width:${animate ? 0 : x(dl) * 100}%"></div></div>
       <div class="rw-end">${r.out ? 'finisce ' + fDay(r.out) : 'oltre 6 mesi'}<small>${r.daysLeft == null ? '' : plural(Math.floor(r.daysLeft), 'giorno', 'giorni')}</small></div>
     </div>`;
@@ -463,7 +463,7 @@ function renderOrders() {
           const c = CAP[l.cap];
           const why = l.extra ? 'Aggiunto da te. Lo terrò d\'occhio dopo la prima consegna.'
             : l.suggested === 0 ? `Non serve: ${l.out ? 'dura fino al ' + fDay(l.out) : 'scorte ampie'}.`
-            : `${int(state.stock[l.cap])} capsule oggi, ${int(l.avg)} al giorno${l.out ? ', finisce ' + fDay(l.out) : ''}. Consigliati ${plural(l.suggested, 'box', 'box')}.`;
+            : `${int(state.stock[l.cap])} cialde oggi, ${int(l.avg)} al giorno${l.out ? ', finisce ' + fDay(l.out) : ''}. Consigliati ${plural(l.suggested, 'box', 'box')}.`;
           return `<article class="line"><img src="${c.img}" alt=""><div><h3>${esc(c.name)}</h3><p>${why}</p></div>
           <div class="step"><button type="button" data-q="${l.cap}" data-d="-1" aria-label="Un box in meno di ${esc(c.name)}">−</button><output>${plural(l.boxes, 'box', 'box')}</output><button type="button" data-q="${l.cap}" data-d="1" aria-label="Un box in più di ${esc(c.name)}">+</button></div>
           <div class="tot">${eur(l.boxes * BOX * c.price)}</div></article>`;
@@ -475,7 +475,7 @@ function renderOrders() {
           <div class="catalog">${notIn.map(c => `<button type="button" data-add="${c.id}"><img src="${c.img}" alt="">${esc(c.name)}<small>${eur(c.price * BOX)} al box</small></button>`).join('')}</div></details>
       </div>
       <aside class="summary"><h3>Il tuo ordine</h3><p class="big">${eur(grand)}</p>
-        <dl><dt>Box da 50 capsule</dt><dd>${a.boxes}</dd><dt>Capsule</dt><dd>${int(a.boxes * BOX)}</dd>${merchLines.map(m => `<dt>${m.name}</dt><dd>${m.qty}</dd>`).join('')}<dt>Spedizioni</dt><dd>1</dd><dt>Se confermi oggi, arriva</dt><dd>${fDay(addWork(t, state.lead))}</dd></dl>
+        <dl><dt>Box da 50 cialde</dt><dd>${a.boxes}</dd><dt>Cialde</dt><dd>${int(a.boxes * BOX)}</dd>${merchLines.map(m => `<dt>${m.name}</dt><dd>${m.qty}</dd>`).join('')}<dt>Spedizioni</dt><dd>1</dd><dt>Se confermi oggi, arriva</dt><dd>${fDay(addWork(t, state.lead))}</dd></dl>
         <button class="btn primary" id="confirm" type="button" ${a.boxes || merch ? '' : 'disabled'}>Conferma ordine</button>
         <small>Prezzi di listino dal sito Nespresso Professional. Demo: l'ordine resta in questa pagina.</small></aside>
     </div></section>
@@ -507,20 +507,20 @@ function renderOrders() {
 }
 
 // ## Pagina Caffe' sospeso: il merch per Napoli
-// Il prezzo e' una stima: parte dal listino reale delle capsule e somma costi ipotizzati.
+// Il prezzo e' una stima: parte dal listino reale delle cialde e somma costi ipotizzati.
 const MERCH = {
   xbox: {
     name: 'Christmas box', img: 'assets/merch/box-tavolo.jpg', price: 89,
     views: [
-      { src: 'assets/merch/box-tavolo.jpg', label: 'In sala', alt: 'Cofanetto aperto con capsule numerate e cartellone su un tavolo in marmo, in un hotel di Napoli a Natale' },
+      { src: 'assets/merch/box-tavolo.jpg', label: 'In sala', alt: 'Cofanetto aperto con 90 cialde numerate e cartellone su un tavolo in marmo, in un hotel di Napoli a Natale' },
       { src: 'assets/merch/box-chiusa.jpg', label: 'Chiusa', alt: 'Cofanetto chiuso in blu, oro e maiolica, su sfondo nero' },
-      { src: 'assets/merch/box-dettaglio.jpg', label: 'Le capsule', alt: 'Primo piano delle capsule con i numeri della tombola 21, 22, 23 e 24' },
+      { src: 'assets/merch/box-dettaglio.jpg', label: 'Le cialde', alt: 'Primo piano delle cialde con i numeri della tombola 21, 22, 23 e 24' },
     ],
-    text: 'La tombola di Natale, in capsule: 90 cialde personalizzate con i numeri da 1 a 90 e il cartellone per giocare.',
+    text: 'La tombola di Natale, in cialde: una per ogni numero da 1 a 90, con il cartellone per giocare.',
     has: ['90 cialde numerate', 'Cartellone della tombola'],
     build: [
-      ['90 capsule, al listino dei caffè di origine (0,62 € l\'una)', 56],
-      ['Numero da 1 a 90 stampato su ogni capsula (0,10 € l\'una)', 9],
+      ['90 cialde, al listino dei caffè di origine (0,62 € l\'una)', 56],
+      ['Numero da 1 a 90 stampato su ogni cialda (0,10 € l\'una)', 9],
       ['Cofanetto decorato e cartellone della tombola', 14],
       ['Margine edizione speciale', 10],
     ],
@@ -529,13 +529,13 @@ const MERCH = {
     name: 'Il curniciello', img: 'assets/merch/cur-studio.jpg', price: 24,
     views: [
       { src: 'assets/merch/cur-studio.jpg', label: 'Chiuso', alt: 'Cornetto rosso con decori in maiolica, fiocco ed etichetta Il curniciello, su sfondo nero' },
-      { src: 'assets/merch/cur-aperto.jpg', label: 'Aperto', alt: 'Cornetto aperto visto dall\'alto su marmo bianco, con capsule oro e blu e nastro rosso' },
-      { src: 'assets/merch/cur-dettaglio.jpg', label: 'Con le capsule', alt: 'Primo piano del cornetto rosso pieno di capsule oro e blu' },
+      { src: 'assets/merch/cur-aperto.jpg', label: 'Aperto', alt: 'Cornetto aperto visto dall\'alto su marmo bianco, con dieci cialde colorate e nastro rosso' },
+      { src: 'assets/merch/cur-dettaglio.jpg', label: 'Con le cialde', alt: 'Primo piano del cornetto rosso pieno di cialde oro e blu' },
     ],
-    text: 'Il cornetto portafortuna di Napoli, rosso e decorato a maiolica, con dentro le capsule. Per tradizione porta fortuna solo se è regalato.',
-    has: ['10 capsule assortite', 'Contenitore a forma di cornetto, con fiocco'],
+    text: 'Il cornetto portafortuna di Napoli, rosso e decorato a maiolica, con dentro le cialde. Per tradizione porta fortuna solo se è regalato.',
+    has: ['10 cialde assortite', 'Contenitore a forma di cornetto, con fiocco'],
     build: [
-      ['10 capsule, al listino dei caffè di origine (0,62 € l\'una)', 6],
+      ['10 cialde, al listino dei caffè di origine (0,62 € l\'una)', 6],
       ['Contenitore decorato a forma di cornetto, con fiocco', 12],
       ['Margine edizione speciale', 6],
     ],
@@ -577,10 +577,10 @@ function renderSospeso() {
     <section class="sec">${merchProduct('xbox')}</section>
     <section class="sec soft"><div class="merch-2">
       <div><h2 class="title">Il cartellone</h2>
-        <p class="sub" style="margin-top:6px">Ogni capsula porta un numero. Ne estrai una, la prepari e segni il numero sul cartellone.</p>
+        <p class="sub" style="margin-top:6px">Ogni cialda porta un numero. Ne estrai una, la prepari e segni il numero sul cartellone.</p>
         <div class="board" role="img" aria-label="Cartellone della tombola con i numeri da 1 a 90">${nums.map(n => `<span>${n}</span>`).join('')}</div></div>
       <div><h2 class="title">Come nasce il prezzo</h2>
-        <p class="sub" style="margin-top:6px">Il listino delle capsule è reale. Le altre voci sono ipotesi da verificare con Nespresso.</p>
+        <p class="sub" style="margin-top:6px">Il listino delle cialde è reale. Le altre voci sono ipotesi da verificare con Nespresso.</p>
         ${priceTable('xbox')}</div>
     </div></section>
     <section class="sec">${merchProduct('curniciello', true)}</section>
@@ -588,7 +588,7 @@ function renderSospeso() {
       <div><h2 class="title">Un portafortuna da regalare</h2>
         <p class="sub" style="margin-top:6px">A Napoli il cornetto non si compra per sé: si riceve in dono. Per questo è pensato per i tuoi ospiti e i tuoi clienti migliori.</p></div>
       <div><h2 class="title">Come nasce il prezzo</h2>
-        <p class="sub" style="margin-top:6px">Il listino delle capsule è reale. Numero di capsule e altre voci sono ipotesi da verificare con Nespresso.</p>
+        <p class="sub" style="margin-top:6px">Il listino delle cialde è reale. Numero di cialde e altre voci sono ipotesi da verificare con Nespresso.</p>
         ${priceTable('curniciello')}</div>
     </div></section>`;
   // Miniature: cambiano solo l'immagine grande, senza ridisegnare la pagina.
@@ -646,7 +646,7 @@ function renderEvents() {
 }
 
 // ## Far passare il tempo nella demo
-// Ogni giorno: si consumano capsule secondo la previsione e arrivano gli ordini attesi.
+// Ogni giorno: si consumano cialde secondo la previsione e arrivano gli ordini attesi.
 function advance(n) {
   const r = rng(state.offset * 97 + 13);
   for (let k = 0; k < n; k++) {
@@ -746,12 +746,12 @@ function answer(text) {
     const r = a.rows.find(x => x.cap === named.id);
     if (!r) return `${esc(named.name)} non è ancora nelle tue scorte. Puoi aggiungerlo dalla pagina <a class="link" href="#ordini">Ordini</a>.`;
     if (!state.stock[named.id]) return `${esc(named.name)} è finito. Ti conviene ordinarlo oggi. <a class="link" href="#ordini">Apri l'ordine</a>`;
-    return `Hai ${int(state.stock[named.id])} capsule di ${esc(named.name)} e ne usi ${int(r.avg)} al giorno. ${r.out ? `Finiscono ${fLong(r.out)}, cioè tra ${plural(Math.floor(r.daysLeft), 'giorno', 'giorni')}.` : 'Ti bastano per oltre 6 mesi.'}`;
+    return `Hai ${int(state.stock[named.id])} cialde di ${esc(named.name)} e ne usi ${int(r.avg)} al giorno. ${r.out ? `Finiscono ${fLong(r.out)}, cioè tra ${plural(Math.floor(r.daysLeft), 'giorno', 'giorni')}.` : 'Ti bastano per oltre 6 mesi.'}`;
   }
   if (/perch|data|quando/.test(q)) {
     if (!a.first) return 'Nessuna data per ora: non serve ordinare.';
     const c = CAP[a.first.cap];
-    return `${esc(c.name)} è il caffè più urgente: ${int(state.stock[a.first.cap])} capsule per ${int(a.first.avg)} al giorno, quindi finisce ${fLong(a.first.out)}. Tolgo ${plural(state.safety, 'giorno', 'giorni')} di margine e ${plural(state.lead, 'giorno lavorativo', 'giorni lavorativi')} di consegna: l'ultimo giorno utile è ${fLong(a.first.by)}.${a.late ? ' È già passato, quindi meglio ordinare oggi.' : ''}`;
+    return `${esc(c.name)} è il caffè più urgente: ${int(state.stock[a.first.cap])} cialde per ${int(a.first.avg)} al giorno, quindi finisce ${fLong(a.first.out)}. Tolgo ${plural(state.safety, 'giorno', 'giorni')} di margine e ${plural(state.lead, 'giorno lavorativo', 'giorni lavorativi')} di consegna: l'ultimo giorno utile è ${fLong(a.first.by)}.${a.late ? ' È già passato, quindi meglio ordinare oggi.' : ''}`;
   }
   if (/spedizion|risparm|logistic|consegn/.test(q)) {
     const last = state.orders.filter(o => diffDays(t, o.date) <= 30 && diffDays(t, o.date) >= 0).length;
