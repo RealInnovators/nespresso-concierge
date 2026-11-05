@@ -510,7 +510,7 @@ function renderOrders() {
 // Il prezzo e' una stima: parte dal listino reale delle cialde e somma costi ipotizzati.
 const MERCH = {
   xbox: {
-    name: 'Christmas box', img: 'assets/merch/box-tavolo.jpg', price: 89,
+    name: 'Christmas box', img: 'assets/merch/box-tavolo.jpg', price: 89.99,
     views: [
       { src: 'assets/merch/box-tavolo.jpg', label: 'In sala', alt: 'Cofanetto aperto con 90 cialde numerate e cartellone su un tavolo in marmo, in un hotel di Napoli a Natale' },
       { src: 'assets/merch/box-chiusa.jpg', label: 'Chiusa', alt: 'Cofanetto chiuso in blu, oro e maiolica, su sfondo nero' },
@@ -522,11 +522,11 @@ const MERCH = {
       ['90 cialde, al listino dei caffè di origine (0,62 € l\'una)', 56],
       ['Numero da 1 a 90 stampato su ogni cialda (0,10 € l\'una)', 9],
       ['Cofanetto decorato e cartellone della tombola', 14],
-      ['Margine edizione speciale', 10],
+      ['Margine edizione speciale', 10.99],
     ],
   },
   curniciello: {
-    name: 'Il curniciello', img: 'assets/merch/cur-studio.jpg', price: 24,
+    name: 'Il curniciello', img: 'assets/merch/cur-studio.jpg', price: 24.99,
     views: [
       { src: 'assets/merch/cur-studio.jpg', label: 'Chiuso', alt: 'Cornetto rosso con decori in maiolica, fiocco ed etichetta Il curniciello, su sfondo nero' },
       { src: 'assets/merch/cur-aperto.jpg', label: 'Aperto', alt: 'Cornetto aperto visto dall\'alto su marmo bianco, con dieci cialde colorate e nastro rosso' },
@@ -537,7 +537,7 @@ const MERCH = {
     build: [
       ['10 cialde, al listino dei caffè di origine (0,62 € l\'una)', 6],
       ['Contenitore decorato a forma di cornetto, con fiocco', 12],
-      ['Margine edizione speciale', 6],
+      ['Margine edizione speciale', 6.99],
     ],
   },
 };
